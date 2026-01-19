@@ -1,0 +1,54 @@
+## Diagrama SOA (Arquitectura Orientada a Servicios)
+
+```mermaid
+flowchart TB
+
+%% Capa de Presentación
+subgraph CP[1. Capa de Presentación (Interfaz)]
+    P1[Portal Web]
+    P2[App Móvil]
+    P3[Kiosco]
+end
+
+%% Capa de Procesos
+subgraph CPr[2. Capa de Procesos (Orquestación)]
+    G1[Gestor de Ventas / Checkout]
+    G1desc["Coordina el flujo:\n- Valida asiento\n- Procesa pago\n- Emite ticket"]
+end
+
+%% Capa de Servicios de Negocio
+subgraph CS[3. Capa de Servicios de Negocio]
+    S1[Servicio de Inventario]
+    S2[Servicio de Pagos]
+    S3[Servicio de Clientes]
+end
+
+%% Capa de Datos e Infraestructura
+subgraph CD[4. Capa de Datos e Infraestructura]
+    D1[(DB SQL\nAsientos)]
+    D2[Pasarela Bancaria\nAPI]
+    D3[Servicio de E-mail\nSMTP]
+end
+
+%% Relaciones
+P1 --> G1
+P2 --> G1
+P3 --> G1
+
+G1 --> G1desc
+G1 --> S1
+G1 --> S2
+G1 --> S3
+
+S1 --> D1
+S2 --> D2
+S3 --> D3
+```
+
+### Leyenda
+
+* **Cada bloque representa una capa SOA** claramente separada.
+* La comunicación se realiza mediante **servicios desacoplados**.
+* Permite escalabilidad, reutilización y fácil mantenimiento.
+
+> Este diagrama puede copiarse y pegarse en herramientas compatibles con **Mermaid** (por ejemplo, Markdown, GitHub, Obsidian, o editores online) para su visualización gráfica.
